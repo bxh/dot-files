@@ -1,7 +1,10 @@
-# Enable colors and change prompt:
+# Load version control information:
 autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-
+autoload -Uz vcs_info
+precmd() {vcs_info}
+zstyle ':vcs_info:*' formats " %{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%} "
+setopt PROMPT_SUBST
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}] ${vcs_info_msg_0_}$%b "
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
